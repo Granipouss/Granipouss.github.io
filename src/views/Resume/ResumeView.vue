@@ -242,13 +242,36 @@ const Icon: FC<{ name: string }> = ({ name }) => <i class="icon material-symbols
 
 <template>
   <div class="page">
+    <main>
+      <section class="title">
+        <h1>
+          <span class="name">{{ aboutMe.firstname }}</span> <span class="surname">{{ aboutMe.lastname }}</span>
+        </h1>
+        <div class="job">{{ aboutMe.job }}</div>
+      </section>
+
+      <section class="about-me">
+        <h2><Icon name="account_circle" /> Profil</h2>
+        <p>{{ aboutMe.description }}</p>
+      </section>
+
+      <section class="history">
+        <h2><Icon name="work" /> Expériences</h2>
+        <article v-for="job of jobs" :key="job.label" class="job">
+          <div class="date">{{ job.date }}</div>
+          <h3>{{ job.label }}</h3>
+          <component :is="job.content" />
+        </article>
+      </section>
+    </main>
+
     <aside>
       <figure class="mugshot">
         <img src="@/assets/face.jpg" alt="Brendan's Face" />
       </figure>
 
       <section class="contacts">
-        <h2 class="side-header"><Icon name="chat_bubble" /> Contact</h2>
+        <h2><Icon name="chat_bubble" /> Contact</h2>
         <dl>
           <template v-for="contact of contacts" :key="contact.name">
             <dt class="label">
@@ -263,14 +286,14 @@ const Icon: FC<{ name: string }> = ({ name }) => <i class="icon material-symbols
       </section>
 
       <section class="education">
-        <h2 class="side-header"><Icon name="school" /> Diplôme</h2>
+        <h2><Icon name="school" /> Diplôme</h2>
         <p class="year">{{ education.year }}</p>
         <h3 class="label">{{ education.name }}</h3>
         <p class="description">{{ education.kind }} - {{ education.description }}</p>
       </section>
 
       <section class="skills">
-        <h2 class="side-header"><Icon name="code" /> Compétences</h2>
+        <h2><Icon name="code" /> Compétences</h2>
         <dl>
           <template v-for="skill of skills" :key="skill.name">
             <dt class="label">{{ skill.name }}</dt>
@@ -280,7 +303,7 @@ const Icon: FC<{ name: string }> = ({ name }) => <i class="icon material-symbols
       </section>
 
       <section class="langs">
-        <h2 class="side-header"><Icon name="translate" /> Langues</h2>
+        <h2><Icon name="translate" /> Langues</h2>
         <dl>
           <template v-for="lang of languages" :key="lang.name">
             <dt class="label">
@@ -291,33 +314,16 @@ const Icon: FC<{ name: string }> = ({ name }) => <i class="icon material-symbols
         </dl>
       </section>
     </aside>
-
-    <main>
-      <section class="title">
-        <h1>
-          <span class="name">{{ aboutMe.firstname }}</span> <span class="surname">{{ aboutMe.lastname }}</span>
-        </h1>
-        <div class="job">{{ aboutMe.job }}</div>
-      </section>
-
-      <section class="about-me">
-        <h2 class="main-header"><Icon name="account_circle" /> Profil</h2>
-        <p>{{ aboutMe.description }}</p>
-      </section>
-
-      <section class="history">
-        <h2 class="main-header"><Icon name="work" /> Expériences</h2>
-        <article v-for="job of jobs" :key="job.label" class="job">
-          <div class="date">{{ job.date }}</div>
-          <h3>{{ job.label }}</h3>
-          <component :is="job.content" />
-        </article>
-      </section>
-    </main>
   </div>
 
   <div class="backdrop"></div>
 </template>
+
+<style lang="scss">
+.material-symbols-outlined {
+  font-size: 1em;
+}
+</style>
 
 <style lang="scss" scoped>
 @use '@material/elevation';
@@ -335,45 +341,111 @@ $color-electrik: #1efdfc;
 $font-header: 'Quicksand', sans-serif;
 $font-body: 'Roboto', sans-serif;
 
+$breakpoint-mobile: 800px;
+$breakpoint-screen: 1200px;
+
 $side-width: 24rem;
 
-:deep(.material-symbols-outlined) {
-  font-size: 1em;
-}
-
-%head-with-icon {
+%header-with-icon {
   gap: 0.25em;
   display: flex;
   align-items: center;
 }
 
+// = Layout ===
+
 .page {
-  // Page Size
+  display: flex;
+  flex-direction: column;
   position: relative;
   overflow: hidden;
-  max-width: 1200px;
-  margin: 3rem auto;
-  @media (max-width: 1200px) {
-    margin: 0;
-    min-height: 100vh;
+  max-width: $breakpoint-screen;
+  gap: 2rem;
+  padding-bottom: 4rem;
+
+  color: $color-dark;
+  background: $color-light;
+
+  main,
+  aside {
+    display: contents;
   }
 
-  @include elevation.elevation(15);
-
-  display: flex;
-  flex-direction: row;
-
-  & > aside {
-    width: $side-width;
-    color: $color-light;
-    background: $color-dark;
+  section {
+    margin: 0 2rem;
   }
-  & > main {
-    flex: 2;
-    color: $color-dark;
-    background: $color-light;
+
+  @media (min-width: $breakpoint-mobile) {
+    flex-direction: row-reverse;
+    padding-bottom: 0;
+    margin: 0 auto;
+    gap: 0;
+
+    section {
+      margin: 3rem;
+    }
+
+    aside {
+      display: block;
+      width: $side-width;
+      color: $color-light;
+      background: $color-dark;
+    }
+
+    main {
+      display: block;
+      flex: 1;
+      color: $color-dark;
+      background: $color-light;
+
+      section {
+        margin-right: 5rem;
+      }
+    }
+  }
+
+  @media (min-width: $breakpoint-screen) {
+    margin: 3rem auto;
+    @include elevation.elevation(15);
   }
 }
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: $color-grey;
+}
+
+// = Elements ===
+
+h2 {
+  @extend %header-with-icon;
+  font-size: 2rem;
+  font-family: $font-header;
+  border-bottom: thin solid $color-red;
+  margin-bottom: 1rem;
+
+  .icon {
+    color: $color-red;
+  }
+
+  @media (min-width: $breakpoint-mobile) {
+    main & {
+      font-size: 2.5rem;
+    }
+
+    aside & {
+      color: $color-red;
+      border-color: $color-wine;
+    }
+  }
+}
+
+// = Sections ===
 
 .mugshot {
   position: relative;
@@ -406,21 +478,63 @@ $side-width: 24rem;
   }
 }
 
+.title {
+  // margin: 5rem 5rem 0;
+
+  .page & {
+    margin: 0;
+    padding: 2rem;
+  }
+
+  background: $color-red;
+  color: $color-light;
+  text-transform: uppercase;
+
+  h1 {
+    line-height: 1;
+    font-family: 'Hammersmith One', sans-serif;
+    font-size: 3.5rem;
+    letter-spacing: -0.1rem;
+    line-height: 0.8;
+    margin-bottom: 1rem;
+  }
+
+  .job {
+    font-family: $font-header;
+    margin-top: -0.5rem;
+    font-size: 1.75rem;
+  }
+
+  @media (min-width: $breakpoint-mobile) {
+    .page & {
+      margin: 0;
+      position: relative;
+      margin-left: -$side-width;
+      padding: 2rem;
+      margin-top: 5rem;
+      padding-left: $side-width + 5rem;
+    }
+
+    h1 {
+      line-height: unset;
+      margin-bottom: 0;
+    }
+  }
+}
+
 aside {
   section {
     margin: 3rem;
   }
 
   .label {
-    @extend %head-with-icon;
-    color: $color-light;
+    @extend %header-with-icon;
     font-weight: bold;
     margin-bottom: 0.4rem;
   }
 
   .description {
     text-align: justify;
-    color: $color-light;
     font-size: 0.9rem;
     line-height: 1.5;
     margin-bottom: 1rem;
@@ -430,82 +544,30 @@ aside {
     color: $color-yellow;
     text-decoration: none;
     font-weight: bold;
+
+    @media (max-width: $breakpoint-mobile) {
+      color: $color-spice;
+    }
   }
 }
 
 .education {
   .year {
-    color: $color-light;
     margin-bottom: 0.25rem;
   }
 }
 
-.side-header {
-  @extend %head-with-icon;
-  font-size: 2rem;
-  font-family: $font-header;
-  color: $color-red;
-  margin-bottom: 1rem;
-  border-bottom: thin solid $color-wine;
-}
-
-main section {
-  margin: 3rem;
-  margin-right: 5rem;
-}
-
-.main-header {
-  @extend %head-with-icon;
-  font-size: 2.5rem;
-  font-family: $font-header;
-  color: $color-dark;
-  margin-bottom: 1rem;
-  border-bottom: thin solid $color-red;
-
-  .icon {
-    color: $color-red;
+.about-me {
+  p {
+    text-align: justify;
   }
-}
-
-.title {
-  margin: 5rem 5rem 0;
-  font-family: $font-header;
-  text-transform: uppercase;
-
-  background: $color-red;
-  margin: 0;
-  position: relative;
-  margin-left: -$side-width;
-  padding: 2rem;
-  margin-top: 5rem;
-  padding-left: $side-width + 5rem;
-
-  h1 {
-    font-family: 'Hammersmith One', sans-serif;
-    font-size: 3.5rem;
-    letter-spacing: -0.1rem;
-    color: $color-light;
-  }
-
-  .job {
-    margin-top: -0.5rem;
-    font-size: 1.75rem;
-    color: $color-light;
-  }
-}
-
-.about-me p {
-  text-align: justify;
 }
 
 .history {
-  $date-column: 10rem;
-  margin-bottom: 6rem;
-
   .job {
     position: relative;
-    margin-left: $date-column;
     margin-bottom: 2rem;
+    margin-left: 1rem;
     padding-left: 2rem;
 
     &::before {
@@ -516,43 +578,63 @@ main section {
       bottom: -2.5rem;
       border-left: thin solid $color-red;
     }
-
     &:last-child::before {
       bottom: 0;
     }
   }
 
-  .date {
+  .date::before {
+    content: '';
     position: absolute;
-    left: -$date-column;
-    width: $date-column;
-    padding-right: 2rem;
+    left: -0.5rem;
+    top: 0.25rem;
+    width: 1rem;
+    height: 1rem;
+    background: $color-grey;
+    border-radius: 50%;
+    outline: 0.4rem solid $color-light;
+  }
 
-    color: $color-grey;
-    font-family: $font-header;
-    font-weight: 600;
-    font-size: 1.1rem;
+  @media (min-width: $breakpoint-mobile) {
+    $date-column: 10rem;
 
-    &::before {
-      content: '';
+    .job {
+      margin-left: $date-column;
+    }
+
+    .date {
       position: absolute;
-      right: -0.5rem;
-      top: 0.25rem;
-      width: 1rem;
-      height: 1rem;
-      background: $color-grey;
-      border-radius: 50%;
-      outline: 0.4rem solid $color-light;
+      left: -$date-column;
+      width: $date-column;
+      padding-right: 2rem;
+
+      &::before {
+        right: -0.5rem;
+        left: unset;
+      }
+    }
+
+    .page main & {
+      margin-bottom: 6rem;
     }
   }
 
-  h3 {
-    color: $color-red;
+  .date {
     font-family: $font-header;
     font-weight: 600;
     font-size: 1.1rem;
+    color: $color-grey;
+    margin-bottom: 0.25rem;
+  }
+
+  h3 {
+    font-family: $font-header;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: $color-red;
     margin-bottom: 0.5rem;
   }
+
   :deep(a) {
     color: $color-spice;
     text-decoration: none;
@@ -574,13 +656,32 @@ main section {
   }
 }
 
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  background: $color-grey;
+// = Section Orders ===
+
+@media (max-width: $breakpoint-mobile) {
+  .title {
+    order: 1;
+  }
+  .mugshot {
+    display: none;
+  }
+  .about-me {
+    order: 2;
+  }
+  .contacts {
+    order: 3;
+  }
+  .skills {
+    order: 4;
+  }
+  .langs {
+    order: 5;
+  }
+  .history {
+    order: 6;
+  }
+  .education {
+    order: 7;
+  }
 }
 </style>
