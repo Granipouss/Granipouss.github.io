@@ -13,7 +13,7 @@ const aboutMe = {
     rouge mon pragmatisme et ma capacité d'adaptation. Si j'ai choisi
     le JavaScript comme langage de prédilection, je souhaite avant
     tout utiliser l'outil qui répond le mieux aux problématiques de
-    chaque projet. Mais mon expertise n'est pas que technique, je
+    chaque projet. Mon expertise n'est pas que technique, je
     suis également très volontaire pour fluidifier le développement
     et m'assurer de la pertinence fonctionnelle de la solution
     proposée.
@@ -68,7 +68,7 @@ const skills = [
   {
     name: 'Javascript/Typescript',
     description: `
-      Expert. Je pratique le JS sous diverse forme depuis le début
+      Expert. Je pratique le JS sous diverses formes depuis le début
       de mon parcours de développement. J'en ai fait mon langage
       de prédilection. Lors de ma carrière, j'ai pu construire des
       applications dans les trois principaux frameworks que sont
@@ -107,8 +107,8 @@ const jobs = [
       <>
         <p>Start-up de 6 personnes proposant un assistant en ligne pour la création de contenu vidéo.</p>
         <p>
-          J'ai travaillé sur l'ensemble des composant de l'application : du rendu vidéo sur le serveur, à l'édition de
-          la mise en page et des sous-titres côtés client. En plus des exigences techniques pour arriver à une solution
+          J'ai travaillé sur l'ensemble des composants de l'application : du rendu vidéo sur le serveur, à l'édition de
+          la mise en page et des sous-titres côté client. En plus des exigences techniques pour arriver à une solution
           fonctionnelle et ergonomique, j'ai apporté mon expérience pour contribuer à la structuration du travail et à
           une gestion de projet.
         </p>
@@ -120,12 +120,12 @@ const jobs = [
   },
   {
     date: 'De Janvier 2021 à Juin 2023',
-    label: 'Programmeur Outils pour Ubisoft France puis international',
+    label: 'Programmeur Outils pour Ubisoft France puis International',
     content: (
       <>
         <p>Au sein du Data Office de la plus grande entreprise de jeu vidéo français.</p>
         <p>
-          J'ai participé à la production d'outils pour aides les data analystes dans leur travail. Mon rôle était
+          J'ai participé à la production d'outils pour aider les data analystes dans leur travail. Mon rôle était
           principalement de produire des interfaces intuitives et d'anticiper les demandes de nos utilisateurs afin de
           réduire le support. Nous avons entamé une transition d'un mode de fonctionnement où l'on produisait des
           solutions sur mesure à chaque demande à la création de produits disponibles pour toutes les productions de
@@ -149,7 +149,7 @@ const jobs = [
           </li>
           <li>
             Vestiaire Collective - Conception d'un CRM permettant aux équipes d'envoyer des mails, sms et notifications
-            personalisées à leurs clients. Solution en React avec un serveur tirant parti de fils d'attente pour gérer
+            personalisés à leurs clients. Solution en React avec un serveur tirant parti de files d'attente pour gérer
             le volume de messages à traiter.
           </li>
           <li>
@@ -162,13 +162,13 @@ const jobs = [
   },
   {
     date: 'De Avril à Septembre 2018',
-    label: "Stage de fin d'étude en cours chez CardMarket à Berlin",
+    label: "Stage de fin d'étude chez CardMarket à Berlin",
     content: (
       <>
         <p>Leader européen de la vente de cartes à jouer et à collectionner.</p>
         <p>
           En tant que développeur front-end junior, j'ai développé des composants visuels, aidé à l'intégration de
-          maquettes et participer à une migration de nombreuses pages vers un nouveau design.
+          maquettes et participé à une migration de nombreuses pages vers un nouveau design.
         </p>
         <small>Utilisation de PHP principalement</small>
       </>
@@ -199,7 +199,7 @@ const jobs = [
         <p>Agence parisienne de design interactif.</p>
         <ul>
           <li>
-            J'ai aidé à la création des écrans interactifs (jeux et publicités) utilisés par Coca Cola pour la
+            J'ai aidé à la création des écrans interactifs (jeux et publicités) utilisés par Coca-Cola pour la
             couverture de l'UEFA en France et en Belgique.
             <small>
               (Video du projet{' '}
@@ -221,7 +221,7 @@ const jobs = [
     content: (
       <>
         <p>
-          Avec un camarade de mon école, j'ai recodé un site participatif de séquençage du génomes de microbes. Le site
+          Avec un camarade de mon école, j'ai recodé un site participatif de séquençage du génome de microbes. Le site
           est à la fois une base de données et un outil de visualisation utilisé par des biologistes à travers le monde.
           Le développement a eu lieu sur 3 ans en relation constante avec les chercheurs de l'université Paris Saclay.
         </p>
