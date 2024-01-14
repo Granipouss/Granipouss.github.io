@@ -127,9 +127,8 @@ const jobs = [
         <p>
           J'ai participé à la production d'outils pour aider les data analystes dans leur travail. Mon rôle était
           principalement de produire des interfaces intuitives et d'anticiper les demandes de nos utilisateurs afin de
-          réduire le support. Nous avons entamé une transition d'un mode de fonctionnement où l'on produisait des
-          solutions sur mesure à chaque demande à la création de produits disponibles pour toutes les productions de
-          l'entreprise.
+          réduire le support. Le mode de fonctionnement consistait à produire des solutions sur mesure à chaque demande,
+          nous sommes passé à la création de produits disponibles pour toutes les productions de l'entreprise.
         </p>
         <small>Utilisation de Angular et de NestJs.</small>
       </>
