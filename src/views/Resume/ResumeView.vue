@@ -34,8 +34,8 @@ const contacts = [
   {
     icon: 'language',
     name: 'Website',
-    value: 'https://github.com/granipouss',
-    link: 'https://github.com/granipouss',
+    value: 'https://granipouss.github.io/about',
+    link: 'https://granipouss.github.io/about',
   },
   {
     icon: 'home_pin',
@@ -140,8 +140,8 @@ const jobs = [
     content: (
       <>
         <p>Cabinet de conseil spécialisé en développement informatique.</p>
-        <p>J'y ai effectué plusieurs missions chez divers clients, notamment :</p>
-        <ul>
+        <p class="no-print">J'y ai effectué plusieurs missions chez divers clients, notamment :</p>
+        <ul class="no-print">
           <li>
             AFP - Création d'un fil d'information en temps réel à destination des journalistes. J'étais le principal
             développeur backend sur une architecture AWS consistuée de microservices.
@@ -165,7 +165,7 @@ const jobs = [
     content: (
       <>
         <p>Leader européen de la vente de cartes à jouer et à collectionner.</p>
-        <p>
+        <p class="no-print">
           En tant que développeur front-end junior, j'ai développé des composants visuels, aidé à l'intégration de
           maquettes et participé à une migration de nombreuses pages vers un nouveau design.
         </p>
@@ -182,7 +182,7 @@ const jobs = [
           Projet de recherche sur les statistiques des images naturelles dans l’Unité d’Informatique et d’Ingénierie
           Système de l’ENSTA ParisTech
         </p>
-        <p>
+        <p class="no-print">
           Mise en pratique de mes connaissances en traitement d'images, statistiques et calcul en parallèle dans le but
           d'en apprendre plus sur les caractéristiques des images dites naturelles.
         </p>
@@ -196,7 +196,7 @@ const jobs = [
     content: (
       <>
         <p>Agence parisienne de design interactif.</p>
-        <ul>
+        <ul class="no-print">
           <li>
             J'ai aidé à la création des écrans interactifs (jeux et publicités) utilisés par Coca-Cola pour la
             couverture de l'UEFA en France et en Belgique.
@@ -219,12 +219,12 @@ const jobs = [
     label: "Site de MLVA pour l'Université Paris Sud",
     content: (
       <>
-        <p>
+        <p class="no-print">
           Avec un camarade de mon école, j'ai recodé un site participatif de séquençage du génome de microbes. Le site
           est à la fois une base de données et un outil de visualisation utilisé par des biologistes à travers le monde.
           Le développement a eu lieu sur 3 ans en relation constante avec les chercheurs de l'université Paris Saclay.
         </p>
-        <small>
+        <small class="no-print">
           Site disponible à{' '}
           <a href="http://microbesgenotyping.i2bc.paris-saclay.fr/" target="_blank">
             http://microbesgenotyping.i2bc.paris-saclay.fr/
@@ -249,7 +249,7 @@ const Icon: FC<{ name: string }> = ({ name }) => <i class="icon material-symbols
         <div class="job">{{ aboutMe.job }}</div>
       </section>
 
-      <section class="about-me">
+      <section class="about-me no-print">
         <h2><Icon name="account_circle" /> Profil</h2>
         <p>{{ aboutMe.description }}</p>
       </section>
@@ -296,7 +296,7 @@ const Icon: FC<{ name: string }> = ({ name }) => <i class="icon material-symbols
         <dl>
           <template v-for="skill of skills" :key="skill.name">
             <dt class="label">{{ skill.name }}</dt>
-            <dd class="description">{{ skill.description }}</dd>
+            <dd class="description no-print">{{ skill.description }}</dd>
           </template>
         </dl>
       </section>
@@ -308,7 +308,7 @@ const Icon: FC<{ name: string }> = ({ name }) => <i class="icon material-symbols
             <dt class="label">
               <span class="flag">{{ lang.flag }}</span> {{ lang.name }}
             </dt>
-            <dd class="description">{{ lang.description }}</dd>
+            <dd class="description no-print">{{ lang.description }}</dd>
           </template>
         </dl>
       </section>
@@ -319,12 +319,6 @@ const Icon: FC<{ name: string }> = ({ name }) => <i class="icon material-symbols
 </template>
 
 <style lang="scss">
-.material-symbols-outlined {
-  font-size: 1em;
-}
-</style>
-
-<style lang="scss" scoped>
 @use '@material/elevation';
 @use '../../assets/variables' as vars;
 
@@ -340,8 +334,8 @@ $color-electrik: #1efdfc;
 $font-header: 'Quicksand', sans-serif;
 $font-body: 'Roboto', sans-serif;
 
-$breakpoint-mobile: 800px;
-$breakpoint-screen: 1200px;
+$breakpoint-mobile: 50rem;
+$breakpoint-screen: 72rem;
 
 $side-width: 24rem;
 
@@ -349,6 +343,10 @@ $side-width: 24rem;
   gap: 0.25em;
   display: flex;
   align-items: center;
+}
+
+.material-symbols-outlined {
+  font-size: 1em;
 }
 
 // = Layout ===
@@ -374,7 +372,7 @@ $side-width: 24rem;
     margin: 0 2rem;
   }
 
-  @media (min-width: $breakpoint-mobile) {
+  @media (min-width: $breakpoint-mobile), print {
     flex-direction: row-reverse;
     padding-bottom: 0;
     margin: 0 auto;
@@ -421,6 +419,17 @@ $side-width: 24rem;
 
 // = Elements ===
 
+.material-symbols-outlined {
+  font-size: 1em;
+}
+
+p {
+  font-size: 1rem;
+}
+small {
+  font-size: 0.8rem;
+}
+
 h2 {
   @extend %header-with-icon;
   font-size: 2rem;
@@ -432,7 +441,7 @@ h2 {
     color: $color-red;
   }
 
-  @media (min-width: $breakpoint-mobile) {
+  @media (min-width: $breakpoint-mobile), print {
     main & {
       font-size: 2.5rem;
     }
@@ -478,8 +487,6 @@ h2 {
 }
 
 .title {
-  // margin: 5rem 5rem 0;
-
   .page & {
     margin: 0;
     padding: 2rem;
@@ -504,7 +511,7 @@ h2 {
     font-size: 1.75rem;
   }
 
-  @media (min-width: $breakpoint-mobile) {
+  @media (min-width: $breakpoint-mobile), print {
     .page & {
       margin: 0;
       position: relative;
@@ -621,7 +628,7 @@ aside {
   .date {
     font-family: $font-header;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: $color-grey;
     margin-bottom: 0.25rem;
   }
@@ -629,27 +636,29 @@ aside {
   h3 {
     font-family: $font-header;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: $color-red;
     margin-bottom: 0.5rem;
   }
-
-  :deep(a) {
+  a {
     color: $color-spice;
     text-decoration: none;
     font-weight: bold;
   }
-  :deep(p) {
+  p {
+    font-size: 1rem;
     margin-bottom: 0.5rem;
     text-align: justify;
   }
-  :deep(li) {
+  li {
+    font-size: 1rem;
     margin-left: 2rem;
     margin-bottom: 0.5rem;
     text-align: justify;
     list-style: disc;
   }
-  :deep(small) {
+  small {
+    font-size: 0.8rem;
     color: $color-grey;
     display: block;
   }
@@ -657,30 +666,86 @@ aside {
 
 // = Section Orders ===
 
-@media (max-width: $breakpoint-mobile) {
+@media not print {
+  @media (max-width: $breakpoint-mobile) {
+    .title {
+      order: 1;
+    }
+    .mugshot {
+      display: none;
+    }
+    .about-me {
+      order: 2;
+    }
+    .contacts {
+      order: 3;
+    }
+    .skills {
+      order: 4;
+    }
+    .langs {
+      order: 5;
+    }
+    .history {
+      order: 6;
+    }
+    .education {
+      order: 7;
+    }
+  }
+}
+
+// = Print ===
+
+@page {
+  size: A4;
+}
+
+@media print {
+  html {
+    font-size: 9pt;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .page {
+    min-height: 100vh;
+    section {
+      margin: 2rem;
+    }
+    aside section {
+      margin-left: 4rem;
+    }
+    main section {
+      margin-right: 4rem;
+    }
+    .history .job {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .history a,
+  aside a {
+    font-weight: normal;
+    color: inherit;
+  }
+
+  .page main {
+    background: white;
+  }
+  .page aside {
+    color: white;
+  }
   .title {
-    order: 1;
+    color: white;
   }
-  .mugshot {
-    display: none;
+  .mugshot::before {
+    border-color: white;
   }
-  .about-me {
-    order: 2;
-  }
-  .contacts {
-    order: 3;
-  }
-  .skills {
-    order: 4;
-  }
-  .langs {
-    order: 5;
-  }
-  .history {
-    order: 6;
-  }
-  .education {
-    order: 7;
+  .history .date::before {
+    outline-color: white;
   }
 }
 </style>
