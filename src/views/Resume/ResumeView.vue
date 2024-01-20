@@ -306,7 +306,7 @@ const Icon: FC<{ name: string }> = ({ name }) => <i class="icon material-symbols
         <dl>
           <template v-for="lang of languages" :key="lang.name">
             <dt class="label">
-              <span class="flag">{{ lang.flag }}</span> {{ lang.name }}
+              <span class="flag no-print">{{ lang.flag }}</span> {{ lang.name }}
             </dt>
             <dd class="description no-print">{{ lang.description }}</dd>
           </template>
